@@ -22,11 +22,11 @@ def part_one(input_map, slope=3, decline=1):
     :return: int
     """
     tree_count = 0
-    y_axis = 0
+    x_axis = 0
     for line in input_map[::decline]:
-        if line[y_axis % len(line)] == "#":
+        if line[x_axis % len(line)] == "#":
             tree_count += 1
-        y_axis += slope
+        x_axis += slope
     return tree_count
 
 
