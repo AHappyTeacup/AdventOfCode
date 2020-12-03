@@ -9,39 +9,40 @@ def main(input_map):
     print(answer_two)
 
 
-def part_one(input_map, slope=3, decline=1):
-    """Travel down the input map by heading right slope, and down decline
-    each iteration.
-    The map repeats infinitely.
-    Get the number of trees - '#' on the map - that would be encountered on
-    this journey.
+def part_one(input_map, right=3, down=1):
+    """Travel down the input map by heading right and down a fixed amount each
+    iteration.
+    The map consists of clear ground '.', and trees '#'.
+    The map repeats to the right infinitely.
+    Get the number of trees that would be encountered travelling from the top
+    left at the specified slope.
 
     :param input_map: A list of lines consisting of '.'s and '#'s.
-    :param slope:
-    :param decline:
+    :param right: The number of grid spaces to move right each iteration
+    :param down: The number of grid spaces to move down each iteration
     :return: int
     """
     tree_count = 0
     x_axis = 0
-    for line in input_map[::decline]:
+    for line in input_map[::down]:
         if line[x_axis % len(line)] == "#":
             tree_count += 1
-        x_axis += slope
+        x_axis += right
     return tree_count
 
 
 def part_two(input_map):
-    """Travel down the input map at different slopes and declines.
+    """Travel down the input map at different slopes.
     Get the product of the number of trees encountered on each run.
 
     :param input_map: A list of lines consisting of '.'s and '#'s.
     :return: int
     """
-    tree_product = part_one(input_map, slope=1, decline=1)
-    tree_product *= part_one(input_map, slope=3, decline=1)
-    tree_product *= part_one(input_map, slope=5, decline=1)
-    tree_product *= part_one(input_map, slope=7, decline=1)
-    tree_product *= part_one(input_map, slope=1, decline=2)
+    tree_product = part_one(input_map, right=1, down=1)
+    tree_product *= part_one(input_map, right=3, down=1)
+    tree_product *= part_one(input_map, right=5, down=1)
+    tree_product *= part_one(input_map, right=7, down=1)
+    tree_product *= part_one(input_map, right=1, down=2)
     return tree_product
 
 
