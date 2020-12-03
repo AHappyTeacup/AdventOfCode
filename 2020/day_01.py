@@ -1,5 +1,9 @@
 """https://adventofcode.com/2020/day/1"""
 import aoc_interface
+import itertools
+
+
+TARGET = 2020
 
 
 def main(expense_report):
@@ -15,11 +19,10 @@ def part_one(expense_report):
     :param expense_report: A list of integers.
     :return: int
     """
-    for idx, entry_1 in enumerate(expense_report):
-        for entry_2 in expense_report[idx:]:
-            if entry_1 + entry_2 == 2020:
-                answer = entry_1 * entry_2
-                return answer
+    for entry_1, entry_2 in itertools.combinations(expense_report, 2):
+        if entry_1 + entry_2 == TARGET:
+            answer = entry_1 * entry_2
+            return answer
 
 
 def part_two(expense_report):
@@ -28,12 +31,10 @@ def part_two(expense_report):
     :param expense_report: A list of integers.
     :return: int
     """
-    for idx, entry_1 in enumerate(expense_report):
-        for idy, entry_2 in enumerate(expense_report[idx:]):
-            for entry_3 in expense_report[idy:]:
-                if entry_1 + entry_2 + entry_3 == 2020:
-                    answer = entry_1 * entry_2 * entry_3
-                    return answer
+    for entry_1, entry_2, entry_3 in itertools.combinations(expense_report, 3):
+        if entry_1 + entry_2 + entry_3 == TARGET:
+            answer = entry_1 * entry_2 * entry_3
+            return answer
 
 
 if __name__ == "__main__":
