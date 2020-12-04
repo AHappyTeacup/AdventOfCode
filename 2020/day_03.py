@@ -9,7 +9,32 @@ def main(input_map):
     print(answer_two)
 
 
-def part_one(input_map, right=3, down=1):
+def part_one(input_map):
+    """Get the tree count of one map traversal.
+
+    :param input_map: A list of lines consisting of '.'s and '#'s.
+    :return: int
+    """
+    tree_count = traverse_map(input_map)
+    return tree_count
+
+
+def part_two(input_map):
+    """Travel down the input map at different slopes.
+    Get the product of the number of trees encountered on each run.
+
+    :param input_map: A list of lines consisting of '.'s and '#'s.
+    :return: int
+    """
+    tree_product = traverse_map(input_map, right=1, down=1)
+    tree_product *= traverse_map(input_map, right=3, down=1)
+    tree_product *= traverse_map(input_map, right=5, down=1)
+    tree_product *= traverse_map(input_map, right=7, down=1)
+    tree_product *= traverse_map(input_map, right=1, down=2)
+    return tree_product
+
+
+def traverse_map(input_map, right=3, down=1):
     """Travel down the input map by heading right and down a fixed amount each
     iteration.
     The map consists of clear ground '.', and trees '#'.
@@ -29,21 +54,6 @@ def part_one(input_map, right=3, down=1):
             tree_count += 1
         x_axis += right
     return tree_count
-
-
-def part_two(input_map):
-    """Travel down the input map at different slopes.
-    Get the product of the number of trees encountered on each run.
-
-    :param input_map: A list of lines consisting of '.'s and '#'s.
-    :return: int
-    """
-    tree_product = part_one(input_map, right=1, down=1)
-    tree_product *= part_one(input_map, right=3, down=1)
-    tree_product *= part_one(input_map, right=5, down=1)
-    tree_product *= part_one(input_map, right=7, down=1)
-    tree_product *= part_one(input_map, right=1, down=2)
-    return tree_product
 
 
 if __name__ == "__main__":
