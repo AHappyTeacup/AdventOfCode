@@ -9,13 +9,6 @@ DAY = 1
 TARGET = 2020
 
 
-def main(expense_report):
-    part_one_answer = part_one(expense_report)
-    part_two_answer = part_two(expense_report)
-
-    return part_one_answer, part_two_answer
-
-
 def part_one(expense_report):
     """Find two entries that sum to 2020, and return their product.
 
@@ -38,6 +31,13 @@ def part_two(expense_report):
         if entry_1 + entry_2 + entry_3 == TARGET:
             answer = entry_1 * entry_2 * entry_3
             return answer
+
+
+def main(expense_report):
+    part_one_answer = part_one(expense_report)
+    part_two_answer = part_two(expense_report)
+
+    return part_one_answer, part_two_answer
 
 
 if __name__ == "__main__":

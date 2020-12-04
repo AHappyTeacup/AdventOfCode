@@ -20,6 +20,42 @@ REQUIRED_PASSPORT_FIELDS = [
 VALID_PASSPORT_FIELDS = REQUIRED_PASSPORT_FIELDS + [CID]
 
 
+def passport_parser(input_passport_list):
+    """Parse the input list for groups of keys.
+    The input list separates each group with an empty line.
+    Each group consists of space separated "<key>:<val>" pairs.
+    Separate these into dictionaries, and yield on an empty line.
+
+    :param input_passport_list: [str]
+    :return: dict
+    """
+    passport = dict()
+    for line in input_passport_list:
+        if line.strip() == '':
+            yield passport
+            passport = dict()
+        else:
+            split_line = line.split(" ")
+            for passport_field in split_line:
+                key_val = passport_field.split(":")
+                passport[key_val[0]] = key_val[1]
+
+
+def digit_assertions(digit, min_max=None, val_len=None):
+    """Apply assertions to strings that are expected to be digits.
+
+    :param digit: A string that may be digits.
+    :param min_max: A tuple of minimum and maximum values for 'digits'.
+    :param val_len: Assert a strict length for 'digits'.
+    :return: None
+    """
+    assert(digit.isdigit())
+    if min_max:
+        assert(min_max[0] <= int(digit) <= min_max[1])
+    if val_len:
+        assert(len(digit) == val_len)
+
+
 def main(input_passport_list):
     part_one_answer = part_one(input_passport_list)
     part_two_answer = part_two(input_passport_list)
@@ -75,6 +111,7 @@ def part_two(input_passport_list):
                 digit_assertions(hgt.replace('in', ''), min_max=(59, 76))
 
             hcl = passport[HCL]
+            assert(len(hcl) == 7)
             assert(hcl[0] == '#')
             for char in hcl[1:]:
                 assert(char.isdigit() or char in ['a', 'b', 'c', 'd', 'e', 'f'])
@@ -93,42 +130,6 @@ def part_two(input_passport_list):
         except (KeyError, AssertionError):
             pass
     return valid_passport_count
-
-
-def passport_parser(input_passport_list):
-    """Parse the input list for groups of keys.
-    The input list separates each group with an empty line.
-    Each group consists of space separated "<key>:<val>" pairs.
-    Separate these into dictionaries, and yield on an empty line.
-
-    :param input_passport_list: [str]
-    :return: dict
-    """
-    passport = dict()
-    for line in input_passport_list:
-        if line.strip() == '':
-            yield passport
-            passport = dict()
-        else:
-            split_line = line.split(" ")
-            for passport_field in split_line:
-                key_val = passport_field.split(":")
-                passport[key_val[0]] = key_val[1]
-
-
-def digit_assertions(digit, min_max=None, val_len=None):
-    """Apply assertions to strings that are expected to be digits.
-
-    :param digit: A string that may be digits.
-    :param min_max: A tuple of minimum and maximum values for 'digits'.
-    :param val_len: Assert a strict length for 'digits'.
-    :return: None
-    """
-    assert(digit.isdigit())
-    if min_max:
-        assert(min_max[0] <= int(digit) <= min_max[1])
-    if val_len:
-        assert(len(digit) == val_len)
 
 
 if __name__ == "__main__":

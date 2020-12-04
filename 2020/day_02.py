@@ -6,14 +6,6 @@ YEAR = 2020
 DAY = 2
 
 
-def main(raw_password_list):
-    password_list = parse_input(raw_password_list)
-    part_one_answer = part_one(password_list)
-    part_two_answer = part_two(password_list)
-
-    return part_one_answer, part_two_answer
-
-
 def parse_input(raw_password_list):
     """Take lines of input of the form "1-3 a: abcde", and break it out into
     its component pieces. 1, 3, a, abcde
@@ -73,6 +65,14 @@ def part_two(password_list):
             valid_password_count += 1
 
     return valid_password_count
+
+
+def main(raw_password_list):
+    password_list = parse_input(raw_password_list)
+    part_one_answer = part_one(password_list)
+    part_two_answer = part_two(password_list)
+
+    return part_one_answer, part_two_answer
 
 
 if __name__ == "__main__":
