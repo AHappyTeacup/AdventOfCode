@@ -21,10 +21,10 @@ VALID_PASSPORT_FIELDS = REQUIRED_PASSPORT_FIELDS + [CID]
 
 
 def main(input_passport_list):
-    answer_one = part_one(input_passport_list)
-    answer_two = part_two(input_passport_list)
+    part_one_answer = part_one(input_passport_list)
+    part_two_answer = part_two(input_passport_list)
 
-    return answer_one, answer_two
+    return part_one_answer, part_two_answer
 
 
 def part_one(input_passport_list):

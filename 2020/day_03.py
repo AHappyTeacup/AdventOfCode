@@ -7,10 +7,10 @@ DAY = 3
 
 
 def main(input_map):
-    answer_one = part_one(input_map)
-    answer_two = part_two(input_map)
+    part_one_answer = part_one(input_map)
+    part_two_answer = part_two(input_map)
 
-    return answer_one, answer_two
+    return part_one_answer, part_two_answer
 
 
 def part_one(input_map):

@@ -10,10 +10,10 @@ TARGET = 2020
 
 
 def main(expense_report):
-    answer_one = part_one(expense_report)
-    answer_two = part_two(expense_report)
+    part_one_answer = part_one(expense_report)
+    part_two_answer = part_two(expense_report)
 
-    return answer_one, answer_two
+    return part_one_answer, part_two_answer
 
 
 def part_one(expense_report):

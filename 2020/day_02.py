@@ -8,10 +8,10 @@ DAY = 2
 
 def main(raw_password_list):
     password_list = parse_input(raw_password_list)
-    answer_one = part_one(password_list)
-    answer_two = part_two(password_list)
+    part_one_answer = part_one(password_list)
+    part_two_answer = part_two(password_list)
 
-    return answer_one, answer_two
+    return part_one_answer, part_two_answer
 
 
 def parse_input(raw_password_list):
