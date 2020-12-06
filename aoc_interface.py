@@ -6,6 +6,7 @@ SESSION_COOKIE = "[REDACTED]"
 RIGHT_ANSWER = "CORRECT"
 WRONG_ANSWER = "INCORRECT"
 ALREADY_ANSWERED = "ALREADY ANSWERED"
+WAIT_TO_ANSWER = "PLEASE WAIT TO SUBMIT ANOTHER ATTEMPT"
 
 
 def get_input(year, day_num):
@@ -46,9 +47,11 @@ def post_answer(year, day_num, level, answer):
     )
     output_soup = soup(output_request.text, "html.parser")
     output_text = output_soup.body.article.p.text
-    if "That's not the right answer." in output_text:
+    if "not the right answer" in output_text:
         return WRONG_ANSWER
-    elif "Did you already complete it?" in output_text:
+    elif "already complete it?" in output_text:
         return ALREADY_ANSWERED
+    elif "answer too recently" in output_text:
+        return WAIT_TO_ANSWER
     else:
         return RIGHT_ANSWER
