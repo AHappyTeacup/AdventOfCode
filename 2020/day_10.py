@@ -1,32 +1,9 @@
-"""https://adventofcode.com/2020/day/9"""
+"""https://adventofcode.com/2020/day/10"""
 import aoc_interface
 
 
 YEAR = 2020
 DAY = 10
-
-
-class JoltageAdaptor:
-    def __init__(self, voltage):
-        self.voltage = voltage
-        self.combinations = None
-        self.children = list()
-
-    def add_child(self, child_adaptor):
-        self.children.append(child_adaptor)
-
-    def count_combinations(self):
-        if not self.combinations:
-            if self.children:
-                combinations = 0
-                for child in self.children:
-                    combinations += child.count_combinations()
-            else:
-                combinations = 1
-            self.combinations = combinations
-        else:
-            combinations = self.combinations
-        return combinations
 
 
 def part_one(joltage_list):
@@ -49,23 +26,19 @@ def part_one(joltage_list):
 
 
 def part_two(joltage_list):
-    adaptor_dict = dict()
-    joltage_list.append(max(joltage_list) + 3)
-    first_adaptor = JoltageAdaptor(0)
-    adaptor_dict[0] = first_adaptor
+    joltage_list.append(0)
+    combinations_dict = {max(joltage_list) + 3: 1}
 
-    for current_joltage in sorted(joltage_list):
-        if current_joltage not in adaptor_dict:
-            adaptor_dict[current_joltage] = JoltageAdaptor(current_joltage)
+    for current_joltage in sorted(joltage_list, reverse=True):
+        if current_joltage not in combinations_dict:
+            current_combinations = 0
+            for i in range(1, 4):
+                if current_joltage+i in combinations_dict:
+                    current_combinations += combinations_dict[current_joltage+i]
+            combinations_dict[current_joltage] = current_combinations
         else:
             raise Exception
-        current_adaptor = adaptor_dict[current_joltage]
-        for i in range(1, 4):
-            if current_joltage - i in adaptor_dict:
-                adaptor_dict[current_joltage-i].add_child(current_adaptor)
-
-    combinations = first_adaptor.count_combinations()
-    return combinations
+    return combinations_dict[0]
 
 
 def main(joltage_list):
