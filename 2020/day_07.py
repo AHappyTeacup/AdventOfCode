@@ -2,10 +2,6 @@
 import aoc_interface
 
 
-YEAR = 2020
-DAY = 7
-
-
 MY_BAG = "shiny gold"
 
 
@@ -65,7 +61,7 @@ def parse_input(raw_bag_rules):
                 child_bag_quantity = int(child_bag_rule.split(" ")[0])
                 child_bag_colour = " ".join(child_bag_rule.split(" ")[1:-1])
 
-                # Get BagRule obeject, create and add it if necessary
+                # Get BagRule object, create and add it if necessary
                 if child_bag_colour not in bag_rules:
                     child_bag = BagRule(child_bag_colour)
                     bag_rules[child_bag_colour] = child_bag
@@ -122,22 +118,22 @@ def part_two(raw_bag_rules):
     return count
 
 
-def main(question_answers):
-    part_one_answer = part_one(question_answers)
-    part_two_answer = part_two(question_answers)
+def main(question_input):
+    part_one_answer = part_one(question_input)
+    part_two_answer = part_two(question_input)
 
     return part_one_answer, part_two_answer
 
 
 if __name__ == "__main__":
-    input_text = aoc_interface.get_input(YEAR, DAY)
+    input_text = aoc_interface.get_input()
     input_list = [x for x in input_text.split("\n") if x != '']
     answer_one, answer_two = main(input_list)
 
     print(answer_one, end="...")
-    answer_one_correct = aoc_interface.post_answer(YEAR, DAY, 1, answer_one)
+    answer_one_correct = aoc_interface.post_answer(1, answer_one)
     print(answer_one_correct)
 
     print(answer_two, end="...")
-    answer_two_correct = aoc_interface.post_answer(YEAR, DAY, 2, answer_two)
+    answer_two_correct = aoc_interface.post_answer(2, answer_two)
     print(answer_two_correct)

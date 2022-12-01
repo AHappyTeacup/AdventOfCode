@@ -2,9 +2,6 @@
 import aoc_interface
 
 
-YEAR = 2020
-DAY = 8
-
 ACC = "acc"
 JMP = "jmp"
 NOP = "nop"
@@ -85,14 +82,14 @@ def main(input_instructions):
 
 
 if __name__ == "__main__":
-    input_text = aoc_interface.get_input(YEAR, DAY)
+    input_text = aoc_interface.get_input()
     input_list = [x for x in input_text.split("\n") if x != '']
     answer_one, answer_two = main(input_list)
 
     print(answer_one, end="...")
-    answer_one_correct = aoc_interface.post_answer(YEAR, DAY, 1, answer_one)
+    answer_one_correct = aoc_interface.post_answer(1, answer_one)
     print(answer_one_correct)
 
     print(answer_two, end="...")
-    answer_two_correct = aoc_interface.post_answer(YEAR, DAY, 2, answer_two)
+    answer_two_correct = aoc_interface.post_answer(2, answer_two)
     print(answer_two_correct)
